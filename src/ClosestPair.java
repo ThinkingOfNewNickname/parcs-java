@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import parcs.*;
 
 public class ClosestPair implements AM {
-    private static final long SEQUENTIAL_CUTOFF = 4;
+    // private static final long SEQUENTIAL_CUTOFF = 4;
 
     public void run(AMInfo info) {
         Node points = (Node)info.parent.readObject();
