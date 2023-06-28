@@ -27,7 +27,7 @@ public class Bluck {
         Point2D p2 = closestPair.points.get(1);
         double min = p1.distance(p2);
 
-        System.out.println("Result: " + min + " (" + p1 + ", " + p2 + ")");
+        System.out.println("Result: " + min + " (" + "{" + p1.x + ", " + p1.y + "}, " + "{" + p2.x + ", " + p2.y + "})");
 
         curtask.end();
     }
