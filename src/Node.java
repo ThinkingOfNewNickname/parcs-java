@@ -2,42 +2,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-// public class Node implements Serializable {
-//     public List<Point2D> points;
-
-//     public Node() {
-//         this.points = new ArrayList<>();
-//     }
-// }
-
 public class Node implements Serializable {
-    private int id;
-    private int time;
-    private List<Node> deps;
+    public List<Point2D> points;
 
-    public Node(int id) {
-        this.id = id;
-        this.time = 0;
-        this.deps = new ArrayList<>();
+    public Node() {
+        this.points = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public List<Node> getDeps() {
-        return deps;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public void addDep(Node dep) {
-        deps.add(dep);
+    public Node(List<Point2D> points) {
+        this.points = points;
     }
 }

@@ -4,83 +4,82 @@ import java.util.ArrayList;
 import parcs.*;
 
 public class ClosestPair implements AM {
-    // private static final long SEQUENTIAL_CUTOFF = 4;
+    private static final long SEQUENTIAL_CUTOFF = 4;
 
     public void run(AMInfo info) {
-        // Node points = (Node)info.parent.readObject();
+        Node points = (Node)info.parent.readObject();
         
-        // info.parent.write(new Node(1));
+        int length = points.points.size();
 
-        Point2D p1 = (Point2D)info.parent.readObject();
+        if (length <= SEQUENTIAL_CUTOFF) {
+            Node closestPair = getClosestPairSequential(points);
+            info.parent.write(closestPair);
 
-        info.parent.write(new Point2D(1, 1));
+            return;
+        }
 
+        int middle = length / 2;
+        Node left = new Node(points.points.subList(0, middle));
+        Node right = new Node(points.points.subList(middle, length));
 
-        // int length = points.length;
+        point p1 = info.createPoint();
+        channel c1 = p1.createChannel();
+        p1.execute("ClosestPair");
+        c1.write(left);
 
-        // if (length <= SEQUENTIAL_CUTOFF) {
-        //     Point2D.Double[] closestPair = getClosestPairSequential(points);
-        //     info.parent.write(closestPair);
+        point p2 = info.createPoint();
+        channel c2 = p2.createChannel();
+        p2.execute("ClosestPair");
+        c2.write(right);
 
-        //     return;
-        // }
+        Node closestPair = combine((Node)c1.readObject(),
+                                   (Node)c2.readObject());
 
-        // int middle = length / 2;
-        // Point2D.Double[] left = Arrays.copyOfRange(points, 0, middle);
-        // Point2D.Double[] right = Arrays.copyOfRange(points, middle, points.length);
-
-        // point p1 = info.createPoint();
-        // channel c1 = p1.createChannel();
-        // p1.execute("ClosestPair");
-        // c1.write(left);
-
-        // point p2 = info.createPoint();
-        // channel c2 = p2.createChannel();
-        // p2.execute("ClosestPair");
-        // c2.write(right);
-
-        // Point2D.Double[] closestPair = combine((Point2D.Double[])c1.readObject(),
-        //                                        (Point2D.Double[])c2.readObject());
-
-        // info.parent.write(closestPair);
+        info.parent.write(closestPair);
     }
 
-    // private Point2D.Double[] getClosestPairSequential(Point2D.Double[] points) {
-    //     Point2D.Double[] closestPair = new Point2D.Double[2];
-    //     double min = Double.MAX_VALUE;
+    private Node getClosestPairSequential(Node points) {
+        Node closestPair = new Node();
+        closestPair.points.add(new Point2D(0, 0));
+        closestPair.points.add(new Point2D(0, 0));
 
-    //     for (int i = 0; i < points.length; i++) {
-    //         Point2D.Double p1 = points[i];
-    //         for (int j = i + 1; j < points.length; j++) {
-    //             Point2D.Double p2 = points[j];
-    //             double dist = p1.distance(p2);
-    //             if (dist < min) {
-    //                 min = dist;
-    //                 closestPair[0] = p1;
-    //                 closestPair[1] = p2;
-    //             }
-    //         }
-    //     }
-    //     return closestPair;
-    // }
+        double min = Double.MAX_VALUE;
 
-    // private Point2D.Double[] combine(Point2D.Double[] left, Point2D.Double[] right) {
-    //     Point2D.Double[] closestPair = new Point2D.Double[2];
-    //     double min = Double.MAX_VALUE;
+        for (int i = 0; i < closestPair.points.size(); i++) {
+            Point2D p1 = closestPair.points.get(i);
+            for (int j = i + 1; j < closestPair.points.size(); j++) {
+                Point2D p2 = closestPair.points.get(j);
+                double dist = p1.distance(p2);
+                if (dist < min) {
+                    min = dist;
+                    closestPair.points.set(0, p1);
+                    closestPair.points.set(1, p2);
+                }
+            }
+        }
+        return closestPair;
+    }
 
-    //     for (int i = 0; i < left.length; i++) {
-    //         Point2D.Double p1 = left[i];
-    //         for (int j = 0; j < right.length; j++) {
-    //             Point2D.Double p2 = right[j];
-    //             double dist = p1.distance(p2);
-    //             if (dist < min) {
-    //                 min = dist;
-    //                 closestPair[0] = p1;
-    //                 closestPair[1] = p2;
-    //             }
-    //         }
-    //     }
+    private Node combine(Node left, Node right) {
+        Node closestPair = new Node();
+        closestPair.points.add(new Point2D(0, 0));
+        closestPair.points.add(new Point2D(0, 0));
 
-    //     return closestPair;
-    // }
+        double min = Double.MAX_VALUE;
+
+        for (int i = 0; i < left.points.size(); i++) {
+            Point2D p1 = left.points.get(i);
+            for (int j = 0; j < right.points.size(); j++) {
+                Point2D p2 = right.points.get(j);
+                double dist = p1.distance(p2);
+                if (dist < min) {
+                    min = dist;
+                    closestPair.points.set(0, p1);
+                    closestPair.points.set(1, p2);
+                }
+            }
+        }
+
+        return closestPair;
+    }
 }
