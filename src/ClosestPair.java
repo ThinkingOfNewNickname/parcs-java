@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import parcs.*;
 
-public class DFS implements AM {
+public class ClosestPair implements AM {
     public void run(AMInfo info) {
         Node n = (Node)info.parent.readObject();
         System.out.println("[" + n.getId() + "] Build started.");
