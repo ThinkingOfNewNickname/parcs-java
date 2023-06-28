@@ -15,7 +15,8 @@ public class Bluck {
 
 
 
-        Node node = new Node(0);
+        // Node node = new Node(0);
+        Point2D p1 = new Point2D(0, 0);
 
 
 
@@ -23,16 +24,18 @@ public class Bluck {
         point p = info.createPoint();
         channel c = p.createChannel();
         p.execute("ClosestPair");
-        c.write(node);
+        c.write(p1);
 
         System.out.println("Waiting for result...");
 
-        Node closestPair = (Node)c.readObject();
+        // Node closestPair = (Node)c.readObject();
         // Point2D p1 = closestPair.points.get(0);
         // Point2D p2 = closestPair.points.get(1);
         // double min = p1.distance(p2);
 
         // System.out.println("Result: " + min + " (" + p1 + ", " + p2 + ")");
+
+        Point2D p2 = (Point2D)c.readObject();
 
         System.out.println("Result: points");
 
