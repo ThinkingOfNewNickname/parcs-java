@@ -22,11 +22,13 @@ public class Bluck {
         System.out.println("Waiting for result...");
 
         Node closestPair = (Node)c.readObject();
-        Point2D p1 = closestPair.points.get(0);
-        Point2D p2 = closestPair.points.get(1);
-        double min = p1.distance(p2);
+        // Point2D p1 = closestPair.points.get(0);
+        // Point2D p2 = closestPair.points.get(1);
+        // double min = p1.distance(p2);
 
-        System.out.println("Result: " + min + " (" + p1 + ", " + p2 + ")");
+        // System.out.println("Result: " + min + " (" + p1 + ", " + p2 + ")");
+
+        System.out.println("Result: " + closestPair.points.size() + " points");
 
         curtask.end();
     }
