@@ -8,7 +8,7 @@ public class ClosestPair implements AM {
     private static final long SEQUENTIAL_CUTOFF = 4;
 
     public void run(AMInfo info) {
-        Point2D.Double[] points = (Point2D.Double[])info.parent.readObject();
+        Node points = (Node)info.parent.readObject();
         info.parent.write(points);
 
 
