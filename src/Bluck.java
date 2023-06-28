@@ -1,6 +1,5 @@
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+import java.awt.geom.Point2D;
+import java.util.*;
 import java.io.File;
 import parcs.*;
 
@@ -8,34 +7,38 @@ public class Bluck {
     public static void main(String[] args) throws Exception {
         task curtask = new task();
         curtask.addJarFile("ClosestPair.jar");
-        Node n = fromFile(curtask.findFile("input"));
+        Point2D.Double[] points = generatePoints(curtask.findFile("input"));
+
+        // Ideally we should parallel it as well, but it's not the point of this task
+        Arrays.sort(points, Comparator.comparingDouble(p -> p.x));
+
+        System.out.println(points.length + " points generated.");
 
         AMInfo info = new AMInfo(curtask, null);
         point p = info.createPoint();
         channel c = p.createChannel();
         p.execute("ClosestPair");
-        c.write(n);
+        c.write(points);
 
         System.out.println("Waiting for result...");
-        System.out.println("Result: " + c.readLong());
+
+        Point2D.Double[] closestPair = (Point2D.Double[])c.readObject();
+        double min = closestPair[0].distance(closestPair[1]);
+
+        System.out.println("Result: " + min + " (" + closestPair[0] + ", " + closestPair[1] + ")");
+
         curtask.end();
     }
 
-    public static Node fromFile(String filename) throws Exception {
-        Scanner sc = new Scanner(new File(filename));
-        int m = sc.nextInt();
-        int s = sc.nextInt();
-        List<Node> nodes = new ArrayList<>();
-        for (int i = 0; i < m; i++) {
-            nodes.add(new Node(i + 1));
+    public static Point2D.Double[] generatePoints(String fileWithAmount) throws Exception {
+        Scanner sc = new Scanner(new File(fileWithAmount));
+        int N = sc.nextInt();
+
+        Point2D.Double[] points = new Point2D.Double[N];
+        for (int i = 0; i < N; i++) {
+            points[i] = new Point2D.Double(Math.random(), Math.random());
         }
-        for (Node n: nodes) {
-            n.setTime(sc.nextInt());
-            int k = sc.nextInt();
-            for (int j = 0; j < k; j++) {
-                n.addDep(nodes.get(sc.nextInt() - 1));
-            }
-        }
-        return nodes.get(s - 1);
+
+        return points;
     }
 }
