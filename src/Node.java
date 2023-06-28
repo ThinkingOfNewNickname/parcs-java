@@ -16,7 +16,7 @@ public class Node implements Serializable {
     // private List<Node> deps;
 
     public Node(int id) {
-        this.id = id;
+        // this.id = id;
         this.time = 0;
         // this.deps = new ArrayList<>();
     }
