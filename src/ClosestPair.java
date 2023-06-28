@@ -51,12 +51,12 @@ public class ClosestPair implements AM {
         closestPair.points.add(new Point2D(0, 0));
         closestPair.points.add(new Point2D(0, 0));
 
-        double min = Double.MAX_VALUE;
+        double min = 10.0;
 
-        for (int i = 0; i < closestPair.points.size(); i++) {
-            Point2D p1 = closestPair.points.get(i);
-            for (int j = i + 1; j < closestPair.points.size(); j++) {
-                Point2D p2 = closestPair.points.get(j);
+        for (int i = 0; i < points.points.size(); i++) {
+            Point2D p1 = points.points.get(i);
+            for (int j = i + 1; j < points.points.size(); j++) {
+                Point2D p2 = points.points.get(j);
                 double dist = p1.distance(p2);
                 if (dist < min) {
                     min = dist;
@@ -73,7 +73,7 @@ public class ClosestPair implements AM {
         closestPair.points.add(new Point2D(0, 0));
         closestPair.points.add(new Point2D(0, 0));
 
-        double min = Double.MAX_VALUE;
+        double min = 10.0;
 
         for (int i = 0; i < left.points.size(); i++) {
             Point2D p1 = left.points.get(i);
