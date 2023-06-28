@@ -12,7 +12,7 @@ public class ClosestPair implements AM {
         for (Node d: n.getDeps()) {
             point p = info.createPoint();
             channel c = p.createChannel();
-            p.execute("DFS");
+            p.execute("ClosestPair");
             c.write(d);
             points.add(p);
             chans.add(c);

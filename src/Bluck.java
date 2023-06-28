@@ -7,13 +7,13 @@ import parcs.*;
 public class Bluck {
     public static void main(String[] args) throws Exception {
         task curtask = new task();
-        curtask.addJarFile("DFS.jar");
+        curtask.addJarFile("ClosestPair.jar");
         Node n = fromFile(curtask.findFile("input"));
 
         AMInfo info = new AMInfo(curtask, null);
         point p = info.createPoint();
         channel c = p.createChannel();
-        p.execute("DFS");
+        p.execute("ClosestPair");
         c.write(n);
 
         System.out.println("Waiting for result...");
