@@ -10,7 +10,7 @@ public class ClosestPair implements AM {
     public void run(AMInfo info) {
         Node points = (Node)info.parent.readObject();
         
-        info.parent.write(new Node());
+        info.parent.write(new Node(1));
 
 
         // int length = points.length;
