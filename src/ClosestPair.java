@@ -47,6 +47,9 @@ public class ClosestPair implements AM {
     }
 
     private Node getClosestPairSequential(Node points) {
+        
+        System.out.println("getClosestPairSequential " + points.points.size());
+
         Node closestPair = new Node();
         closestPair.points.add(new Point2D(0, 0));
         closestPair.points.add(new Point2D(0, 0));
@@ -72,6 +75,9 @@ public class ClosestPair implements AM {
     }
 
     private Node combine(Node left, Node right) {
+
+        System.out.println("combine " + left.points.size() + " " + right.points.size());
+
         Node closestPair = new Node();
         closestPair.points.add(new Point2D(0, 0));
         closestPair.points.add(new Point2D(0, 0));
