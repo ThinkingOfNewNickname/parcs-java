@@ -19,8 +19,8 @@ public class ClosestPair implements AM {
         }
 
         int middle = length / 2;
-        Node left = new Node(points.points.subList(0, middle));
-        Node right = new Node(points.points.subList(middle, length));
+        Node left = createSubNode(points, 0, middle);
+        Node right = createSubNode(points, middle, length);
 
         point p1 = info.createPoint();
         channel c1 = p1.createChannel();
@@ -36,6 +36,14 @@ public class ClosestPair implements AM {
                                    (Node)c2.readObject());
 
         info.parent.write(closestPair);
+    }
+
+    private Node createSubNode(Node points, int from, int to) {
+        Node subNode = new Node();
+        for (int i = from; i < to; i++) {
+            subNode.points.add(points.points.get(i));
+        }
+        return subNode;
     }
 
     private Node getClosestPairSequential(Node points) {
