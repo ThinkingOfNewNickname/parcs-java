@@ -1,0 +1,39 @@
+// preset 1
+
+echo 10.142.0.8 > hosts.list
+echo 10.142.0.7 >> hosts.list
+echo 10.150.0.2 >> hosts.list
+echo 10.150.0.3 >> hosts.list
+echo 10.150.0.5 >> hosts.list
+echo 10.150.0.4 >> hosts.list
+cat hosts.list
+java -jar TCPHostsServer.jar
+
+// preset 2
+
+echo 10.150.0.2 > hosts.list
+echo 10.150.0.3 >> hosts.list
+echo 10.150.0.5 >> hosts.list
+echo 10.150.0.4 >> hosts.list
+cat hosts.list
+java -jar TCPHostsServer.jar
+
+// preset 3
+
+echo 10.142.0.8 > hosts.list
+echo 10.142.0.7 >> hosts.list
+cat hosts.list
+java -jar TCPHostsServer.jar
+
+// preset 4
+
+echo 10.142.0.8 > hosts.list
+cat hosts.list
+java -jar TCPHostsServer.jar
+
+// preset 5
+
+echo 10.150.0.4 > hosts.list
+cat hosts.list
+java -jar TCPHostsServer.jar
+
