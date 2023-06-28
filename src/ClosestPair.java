@@ -47,9 +47,6 @@ public class ClosestPair implements AM {
     }
 
     private Node getClosestPairSequential(Node points) {
-        
-        System.out.println("getClosestPairSequential " + points.points.size());
-
         Node closestPair = new Node();
         closestPair.points.add(new Point2D(0, 0));
         closestPair.points.add(new Point2D(0, 0));
@@ -62,8 +59,6 @@ public class ClosestPair implements AM {
                 Point2D p2 = points.points.get(j);
                 double dist = p1.distance(p2);
 
-                System.out.println("sequential " + "{" + p1.x + ", " + p1.y + "}, " + "{" + p2.x + ", " + p2.y + "}" + " " + dist);
-
                 if (dist < min) {
                     min = dist;
                     closestPair.points.set(0, p1);
@@ -75,9 +70,6 @@ public class ClosestPair implements AM {
     }
 
     private Node combine(Node left, Node right) {
-
-        System.out.println("combine " + left.points.size() + " " + right.points.size());
-
         Node closestPair = new Node();
         closestPair.points.add(new Point2D(0, 0));
         closestPair.points.add(new Point2D(0, 0));
@@ -89,8 +81,6 @@ public class ClosestPair implements AM {
             for (int j = 0; j < right.points.size(); j++) {
                 Point2D p2 = right.points.get(j);
                 double dist = p1.distance(p2);
-
-                System.out.println("combine " + "{" + p1.x + ", " + p1.y + "}, " + "{" + p2.x + ", " + p2.y + "}" + " " + dist);
 
                 if (dist < min) {
                     min = dist;

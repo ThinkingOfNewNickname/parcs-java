@@ -12,10 +12,6 @@ public class Bluck {
         node.points.sort(Comparator.comparingDouble(p -> p.y));
 
         System.out.println(node.points.size() + " points generated.");
-        for (Point2D p : node.points) {
-            System.out.println("{" + p.x + ", " + p.y + "}");
-        }
-
 
         AMInfo info = new AMInfo(curtask, null);
         point p = info.createPoint();
