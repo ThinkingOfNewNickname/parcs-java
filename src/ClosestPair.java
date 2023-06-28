@@ -9,36 +9,36 @@ public class ClosestPair implements AM {
 
     public void run(AMInfo info) {
         Point2D.Double[] points = (Point2D.Double[])info.parent.readObject();
+        info.parent.write(points);
 
-        int length = points.length;
 
-        if (length <= SEQUENTIAL_CUTOFF) {
-            Point2D.Double[] closestPair = getClosestPairSequential(points);
-            info.parent.write(closestPair);
+        // int length = points.length;
 
-            return;
-        }
+        // if (length <= SEQUENTIAL_CUTOFF) {
+        //     Point2D.Double[] closestPair = getClosestPairSequential(points);
+        //     info.parent.write(closestPair);
 
-        int middle = length / 2;
-        Point2D.Double[] left = Arrays.copyOfRange(points, 0, middle);
-        Point2D.Double[] right = Arrays.copyOfRange(points, middle, points.length);
+        //     return;
+        // }
 
-        point p1 = info.createPoint();
-        channel c1 = p1.createChannel();
-        p1.execute("ClosestPair");
-        c1.write(left);
+        // int middle = length / 2;
+        // Point2D.Double[] left = Arrays.copyOfRange(points, 0, middle);
+        // Point2D.Double[] right = Arrays.copyOfRange(points, middle, points.length);
 
-        point p2 = info.createPoint();
-        channel c2 = p2.createChannel();
-        p2.execute("ClosestPair");
-        c2.write(right);
+        // point p1 = info.createPoint();
+        // channel c1 = p1.createChannel();
+        // p1.execute("ClosestPair");
+        // c1.write(left);
 
-        Point2D.Double[] closestPair = combine((Point2D.Double[])c1.readObject(),
-                                               (Point2D.Double[])c2.readObject());
+        // point p2 = info.createPoint();
+        // channel c2 = p2.createChannel();
+        // p2.execute("ClosestPair");
+        // c2.write(right);
 
-        info.parent.write(closestPair);
+        // Point2D.Double[] closestPair = combine((Point2D.Double[])c1.readObject(),
+        //                                        (Point2D.Double[])c2.readObject());
 
-        return;
+        // info.parent.write(closestPair);
     }
 
     private Point2D.Double[] getClosestPairSequential(Point2D.Double[] points) {
